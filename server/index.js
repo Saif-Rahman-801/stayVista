@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const { MongoClient, ServerApiVersion } = require('mongodb')
 const jwt = require('jsonwebtoken')
 const morgan = require('morgan')
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 5000
 
 // middleware
 const corsOptions = {
@@ -18,6 +18,7 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser())
 app.use(morgan('dev'))
+
 const verifyToken = async (req, res, next) => {
   const token = req.cookies?.token
   console.log(token)
@@ -34,7 +35,9 @@ const verifyToken = async (req, res, next) => {
   })
 }
 
-const client = new MongoClient(process.env.DB_URI, {
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.86h0qhu.mongodb.net/?retryWrites=true&w=majority`;
+
+const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
