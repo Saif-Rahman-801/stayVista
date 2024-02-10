@@ -2,7 +2,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import qs from "query-string";
 
-const Categorybox = ({ label, icon: Icon }) => {
+const Categorybox = ({ label, icon: Icon, selected }) => {
   // eslint-disable-next-line no-unused-vars
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
@@ -49,7 +49,10 @@ Steps ->
   return (
     <div
       onClick={handleClick}
-      className="flex flex-col justify-center items-center p-3 gap-2 border-b-2 cursor-pointer hover:text-neutral-800 transition"
+      className={`
+      flex flex-col justify-center items-center p-3 gap-2 cursor-pointer hover:text-neutral-800 transition
+      ${selected ? "border-b-2 border-black" : "border-b-2"}
+      `}
     >
       <Icon size={26} />
       <div className="text-sm font-medium">{label} </div>
