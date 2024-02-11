@@ -49,11 +49,14 @@ const Rooms = () => {
           ))}
         </div>
       ) : (
+        <div className="flex flex-col h-[50vh] justify-center">
         <Heading
           title={"Category is not avaiable"}
           subtitle={"please search other categories"}
           center={true}
         />
+        </div>
+
       )}
     </Container>
   );
