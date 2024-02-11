@@ -15,9 +15,8 @@ const Rooms = () => {
   const category = params.get("category");
 
   useEffect(() => {
-    setLoading(true);
     axios
-      .get("./rooms.json")
+      .get("https://raw.githubusercontent.com/shakilahmedatik/stay-vista-resources/main/data/rooms.json")
       .then((response) => {
         const data = response.data;
         if (category) {
@@ -25,16 +24,20 @@ const Rooms = () => {
             (item) => item.category === category
           );
           setRooms(filteredData);
-          setLoading(false);
+          // setLoading(false);
         } else {
           setRooms(data);
-          setLoading(false);
+          // setLoading(false);
         }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   }, [category]);
+
+  if(rooms.length < 0){
+    setLoading(true)
+  }
 
   if (loading) {
     return <Loader smallHeight={true} />;
